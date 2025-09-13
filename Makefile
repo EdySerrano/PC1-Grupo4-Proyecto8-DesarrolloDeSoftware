@@ -22,6 +22,12 @@ build:
 run:
 	@bash src/checks.sh
 
+# Genera un paquete tar.gz en dist/
+pack: build
+	@mkdir -p dist
+	tar -czf dist/app-$(RELEASE).tar.gz src/ docs/ tests/
+	@echo "Paquete generado en dist/app-$(RELEASE).tar.gz"
+
 # Limpia las carpetas out
 clean:
 	@rm -rf out
@@ -33,4 +39,5 @@ help:
 	@echo "  tools	: Verifica las dependencias necesarias"
 	@echo "  build	: Prepara los artefactos en out/"
 	@echo "  run	: Ejecuta el flujo principal"
+	@echo "  pack   -> Genera paquete reproducible en dist/"
 	@echo "  clean	: Borra out/ y dist/"
