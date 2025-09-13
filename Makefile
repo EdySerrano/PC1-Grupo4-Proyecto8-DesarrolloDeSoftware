@@ -22,6 +22,10 @@ build:
 run:
 	@bash src/checks.sh
 
+# Ejecuta pruebas con Bats
+test:
+	@bats tests
+
 # Genera un paquete tar.gz en dist/
 pack: build
 	@mkdir -p dist
@@ -39,5 +43,6 @@ help:
 	@echo "  tools	: Verifica las dependencias necesarias"
 	@echo "  build	: Prepara los artefactos en out/"
 	@echo "  run	: Ejecuta el flujo principal"
-	@echo "  pack   -> Genera paquete reproducible en dist/"
+	@echo "  test   : Ejecuta pruebas con Bats"
+	@echo "  pack   : Genera paquete reproducible en dist/"
 	@echo "  clean	: Borra out/ y dist/"
