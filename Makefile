@@ -17,3 +17,10 @@ build:
 clean:
 	@rm -rf out
 	@echo "Carpeta out/ limpiada"
+
+# Muestra los targets disponibles
+help:
+	@echo "Targets disponibles:"
+	@echo "  tools	: Verifica las dependencias necesarias"
+	@echo "  build	: Prepara los artefactos en out/"
+	@echo "  clean	: Borra out/ y dist/"
