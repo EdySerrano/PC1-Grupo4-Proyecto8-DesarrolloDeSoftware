@@ -18,6 +18,10 @@ build:
 	@mkdir -p out
 	@echo "Build basico completado"
 
+# Ejecuta el flujo principal
+run:
+	@bash src/checks.sh
+
 # Limpia las carpetas out
 clean:
 	@rm -rf out
@@ -28,4 +32,5 @@ help:
 	@echo "Targets disponibles:"
 	@echo "  tools	: Verifica las dependencias necesarias"
 	@echo "  build	: Prepara los artefactos en out/"
+	@echo "  run	: Ejecuta el flujo principal"
 	@echo "  clean	: Borra out/ y dist/"
