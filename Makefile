@@ -12,3 +12,8 @@ tools:
 build:
 	@mkdir -p out
 	@echo "Build basico completado"
+
+# Limpia las carpetas out
+clean:
+	@rm -rf out
+	@echo "Carpeta out/ limpiada"
