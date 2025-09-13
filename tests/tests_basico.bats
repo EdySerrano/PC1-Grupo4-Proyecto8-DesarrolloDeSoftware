@@ -5,3 +5,7 @@ setup() {
   export TARGETS="example.com"
   export DNS_SERVER="8.8.8.8"
 }
+
+@test "Variable MESSAGE está definida" {
+  [ -n "$MESSAGE" ]
+}
