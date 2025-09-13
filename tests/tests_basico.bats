@@ -9,3 +9,8 @@ setup() {
 @test "Variable MESSAGE está definida" {
   [ -n "$MESSAGE" ]
 }
+
+@test "Chequeo HTTP devuelve código 200" {
+  run bash src/checks.sh
+  [[ "$output" =~ "HTTP example.com -> 200" ]]
+}
