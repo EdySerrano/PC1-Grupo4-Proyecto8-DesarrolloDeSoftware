@@ -1,3 +1,8 @@
+# Variables
+RELEASE ?= v0.1
+DNS_SERVER ?= 8.8.8.8
+TARGETS ?= ejemplo.com
+
 # Targets
 .PHONY: help tools build clean
 
