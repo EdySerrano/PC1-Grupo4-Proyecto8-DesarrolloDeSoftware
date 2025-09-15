@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Manejo de errores
+trap 'echo "Error en la ejecucion (linea $LINENO)"; exit 1' ERR
+trap 'echo "Saliendo, limpieza finalizada"' EXIT
+
 # Variables de entorno
 : "${MESSAGE:?Variable MESSAGE no definida}"
 : "${TARGETS:?Variable TARGETS no definida}"
