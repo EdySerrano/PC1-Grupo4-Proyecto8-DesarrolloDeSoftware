@@ -17,15 +17,17 @@ http_check(){
 
 dns_check(){
   local host=$1
-  dig @"$DNS_SERVER" +short "$host"
+  # solo direcciones IPv4 validas
+  dig @"$DNS_SERVER" +short "$host" | grep -Eo '([0-9]{1,3}\.){3}[0-9]{1,3}' || true
 }
 
 echo "Se esta ejecutando chequeos con mensaje: $MESSAGE"
 
 for host in $TARGETS; do
   code=$(http_check "$host")
+  # solo mostrar host y codigo
   echo "HTTP $host -> $code"
 
   result=$(dns_check "$host")
-  echo "DNS $host -> $result"
+  echo "DNS $host -> ${result:-No encontrado}"
 done
