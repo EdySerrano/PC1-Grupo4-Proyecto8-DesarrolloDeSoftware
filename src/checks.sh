@@ -10,16 +10,22 @@ trap 'echo "Saliendo, limpieza finalizada"' EXIT
 : "${TARGETS:?Variable TARGETS no definida}"
 : "${DNS_SERVER:?Variable DNS_SERVER no definida}"
 
+http_check(){
+  local host=$1
+  curl -s -o /dev/null -w "%{http_code}" "http://$host"
+}
+
+dns_check(){
+  local host=$1
+  dig @"$DNS_SERVER" +short "$host"
+}
+
 echo "Se esta ejecutando chequeos con mensaje: $MESSAGE"
 
-# Chequeo de HTTP
 for host in $TARGETS; do
-  code=$(curl -s -o /dev/null -w "%{http_code}" "http://$host")
+  code=$(http_check "$host")
   echo "HTTP $host -> $code"
-done
 
-# Chequeo de DNS
-for host in $TARGETS; do
-  result=$(dig @"$DNS_SERVER" +short "$host")
+  result=$(dns_check "$host")
   echo "DNS $host -> $result"
 done
