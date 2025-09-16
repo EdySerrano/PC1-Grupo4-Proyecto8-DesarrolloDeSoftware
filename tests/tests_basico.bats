@@ -1,9 +1,10 @@
 #!/usr/bin/env bats
 
 setup() {
-  export MESSAGE="Hello"
-  export TARGETS="example.com"
+  export MESSAGE="Hola desde mi app"
+  export TARGETS="ejemplo.com"
   export DNS_SERVER="8.8.8.8"
+  export PORT = 9090
 }
 
 @test "Variable MESSAGE está definida" {
