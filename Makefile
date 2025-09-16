@@ -4,7 +4,7 @@ DNS_SERVER ?= 8.8.8.8
 TARGETS ?= ejemplo.com
 
 # Targets
-.PHONY: help tools build clean
+.PHONY: help tools build clean install-service
 
 # Muestra las herramientas necesarias
 tools:
@@ -36,6 +36,15 @@ pack: build
 clean:
 	@rm -rf out
 	@echo "Carpeta out/ limpiada"
+
+# Instala el servicio systemd
+install-service: build
+	@echo "Instalando servicio systemd..."
+	@sed 's|{{PROJECT_DIR}}|$(PWD)|g' systemd/app.service > out/app.service
+	@sed -i 's|Environment=PORT=8080 MESSAGE=Hola_desde_systemd|Environment=PORT=$(PORT) MESSAGE=$(MESSAGE)|g' out/app.service
+	@sudo cp out/app.service /etc/systemd/system/
+	@sudo systemctl daemon-reload
+	@echo "Servicio instalado."
 
 # Muestra los targets disponibles
 help:
