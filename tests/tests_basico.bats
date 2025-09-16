@@ -1,16 +1,32 @@
 #!/usr/bin/env bats
 
 setup() {
-  export MESSAGE="Hello"
-  export TARGETS="example.com"
+  export MESSAGE="Hola desde mi app"
+  export TARGETS="ejemplo.com"
   export DNS_SERVER="8.8.8.8"
+  export PORT=9090
 }
 
-@test "Variable MESSAGE está definida" {
+@test "Variable MESSAGE esta definida" {
   [ -n "$MESSAGE" ]
 }
 
-@test "Chequeo HTTP devuelve código 200" {
+@test "Falla si falta variable de entorno" {
+  unset MESSAGE
   run bash src/checks.sh
-  [[ "$output" =~ "HTTP example.com -> 200" ]]
+  [ "$status" -ne 0 ]
+}
+
+@test "Chequeo HTTP devuelve codigo 200" {
+  run bash src/checks.sh
+  [[ "$output" =~ "HTTP ejemplo.com -> 200" ]]
+}
+
+@test "runner.sh arranca y responde a SIGTERM" {
+  bash src/runner.sh &
+  pid=$!
+  sleep 1
+  kill -TERM "$pid"
+  wait "$pid"
+  [ $? -eq 0 ]
 }
