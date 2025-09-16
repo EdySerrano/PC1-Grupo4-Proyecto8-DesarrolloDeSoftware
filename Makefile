@@ -4,7 +4,7 @@ DNS_SERVER ?= 8.8.8.8
 TARGETS ?= ejemplo.com
 
 # Targets
-.PHONY: help tools build clean install-service
+.PHONY: help tools build clean install-service start-service stop-service
 
 # Muestra las herramientas necesarias
 tools:
@@ -44,7 +44,20 @@ install-service: build
 	@sed -i 's|Environment=PORT=8080 MESSAGE=Hola_desde_systemd|Environment=PORT=$(PORT) MESSAGE=$(MESSAGE)|g' out/app.service
 	@sudo cp out/app.service /etc/systemd/system/
 	@sudo systemctl daemon-reload
-	@echo "Servicio instalado."
+	@echo "Servicio instalado. Use 'make start-service' para iniciarlo"
+
+# Inicia el servicio systemd
+start-service:
+	@echo "Iniciando servicio"
+	@sudo systemctl enable app
+	@sudo systemctl start app
+	@echo "Servicio iniciado."
+
+# Detiene el servicio systemd
+stop-service:
+	@echo "Deteniendo servicio"
+	@sudo systemctl stop app
+	@echo "Servicio detenido."
 
 # Muestra los targets disponibles
 help:
