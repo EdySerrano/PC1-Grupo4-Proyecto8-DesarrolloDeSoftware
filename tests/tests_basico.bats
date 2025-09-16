@@ -2,7 +2,7 @@
 
 setup() {
   export MESSAGE="Hola desde mi app"
-  export TARGETS="ejemplo.com"
+  export TARGETS="example.com"
   export DNS_SERVER="8.8.8.8"
   export PORT=9090
 }
@@ -19,7 +19,7 @@ setup() {
 
 @test "Chequeo HTTP devuelve codigo 200" {
   run bash src/checks.sh
-  [[ "$output" =~ "HTTP ejemplo.com -> 200" ]]
+  [[ "$output" =~ "HTTP example.com -> 200" ]]
 }
 
 @test "runner.sh arranca y responde a SIGTERM" {
