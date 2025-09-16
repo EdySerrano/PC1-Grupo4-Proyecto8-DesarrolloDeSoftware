@@ -7,8 +7,14 @@ setup() {
   export PORT = 9090
 }
 
-@test "Variable MESSAGE está definida" {
+@test "Variable MESSAGE esta definida" {
   [ -n "$MESSAGE" ]
+}
+
+@test "Falla si falta variable de entorno" {
+  unset MESSAGE
+  run bash src/checks.sh
+  [ "$status" -ne 0 ]
 }
 
 @test "Chequeo HTTP devuelve código 200" {
