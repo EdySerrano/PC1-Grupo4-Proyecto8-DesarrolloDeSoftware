@@ -30,3 +30,14 @@ setup() {
   wait "$pid"
   [ $? -eq 0 ]
 }
+
+@test "Validar idempotencia de run" {
+  run bash src/validar.sh
+  [[ "$output" =~ "Idempotencia validada" ]]
+}
+
+
+@test "Validar contrato de salida (paquete en dist)" {
+  make pack
+  [ -f dist/app-v0.1.tar.gz ]
+}
