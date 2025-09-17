@@ -12,3 +12,11 @@ else
   echo "Diferencias encontradas en ejecuciones consecutivas"
   exit 1
 fi
+
+echo "Validando contrato de salida..."
+if ls dist/app-*.tar.gz >/dev/null 2>&1; then
+  echo "Paquete encontrado en dist/"
+else
+  echo "No se encontró paquete en dist/"
+  exit 1
+fi
