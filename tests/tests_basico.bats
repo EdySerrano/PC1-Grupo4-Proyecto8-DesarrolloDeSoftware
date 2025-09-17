@@ -30,3 +30,8 @@ setup() {
   wait "$pid"
   [ $? -eq 0 ]
 }
+
+@test "Validar idempotencia de run" {
+  run bash src/validar.sh
+  [[ "$output" =~ "Idempotencia validada" ]]
+}
