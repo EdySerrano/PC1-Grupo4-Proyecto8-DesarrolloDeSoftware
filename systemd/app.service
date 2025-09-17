@@ -1,0 +1,12 @@
+[Unit]
+Description=App Builder Service
+After=network.target
+
+[Service]
+WorkingDirectory={{PROJECT_DIR}}
+ExecStart=/usr/bin/bash src/runner.sh
+Restart=always
+Environment=PORT=8080 MESSAGE=Hola_desde_systemd
+
+[Install]
+WantedBy=multi-user.target
